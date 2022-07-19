@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>250602463513-p2krs6g5boibvuvo47g4067e42jso57u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.250602463513-p2krs6g5boibvuvo47g4067e42jso57u</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAr2GwIhPQSyQhHF_E6u7-gWVYZt-_sRfI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>250602463513</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>test.Messenger</string>
+	<key>PROJECT_ID</key>
+	<string>messenger-33d32</string>
+	<key>STORAGE_BUCKET</key>
+	<string>messenger-33d32.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:250602463513:ios:ffdecf3c50f90453202588</string>
+</dict>
+</plist>
