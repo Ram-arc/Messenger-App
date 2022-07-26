@@ -2,13 +2,16 @@
 //  LoginViewController.swift
 //  Messenger
 //
-//  Created by Vamsi krishna on 06/07/22.
+//  Created by Ram Kaluri on 06/07/22.
 //
 
 import UIKit
 import FirebaseAuth
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
+    
+    private let spinner = JGProgressHUD(style: .dark)
 
     private let imageView: UIImageView = {
         
@@ -136,7 +139,7 @@ class LoginViewController: UIViewController {
          return
        }
      
-        
+        spinner.show(in: view)
         //firebase login
         // weak self for mpreventing memory leak
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: {  [weak self]authResult , error in
@@ -145,6 +148,9 @@ class LoginViewController: UIViewController {
                 return
             }
             
+            DispatchQueue.main.async {
+                self?.spinner.dismiss()
+            }
             
             guard let result = authResult , error == nil  else {
                 

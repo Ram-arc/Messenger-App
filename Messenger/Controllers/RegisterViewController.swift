@@ -2,14 +2,17 @@
 //  RegisterViewController.swift
 //  Messenger
 //
-//  Created by Vamsi krishna on 06/07/22.
+//  Created by Ram Kaluri on 06/07/22.
 //
 
 import UIKit
 import FirebaseAuth
+import JGProgressHUD
 
 class RegisterViewController: UIViewController, UINavigationControllerDelegate {
     
+    
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let imageview : UIImageView = {
         
@@ -204,12 +207,19 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
          print("alert")
           return
         }
-        
+        spinner.show(in: view)
         
         DatabaseManager.shared.userExists(with: email, completion: {exists in
             
+            DispatchQueue.main.async {
+                self.spinner.dismiss()
+            }
+             
             guard !exists else{
                 //user already exists
+                
+                
+                
                 self.alertUserLogin(message : "email already exists . Try another one. ")
                 
                 return
@@ -235,7 +245,36 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
                 let user = result.user
                 print("created user: \(user)")
                 
-                DatabaseManager.shared.insertUser(with: chatAppuser(firstName: firstname, lastName: lastname, emailAddress: email))
+                let chatUser =  chatAppuser(firstName: firstname, lastName: lastname, emailAddress: email)
+                DatabaseManager.shared.insertUser(with: chatUser , completion: {success in
+                    
+                    if success {
+                        
+                        //upload image
+                        guard let image = self?.imageview.image , let data = image.pngData() else{
+                            
+                            return
+                        }
+                        
+                        let fileName = chatUser.profilePictureFileName
+                        StorageManager.shared.uploadprofileImage(with: data, filename: fileName, completion: {result in
+                            
+                            switch result {
+                            case .success(let downloadUrl) : print(downloadUrl)
+                                UserDefaults.standard.setValue(downloadUrl, forKey: "profile_picture_url")
+                                
+                            
+                            case .failure(let error): print("storage manager error : \(error)")
+                            
+                            }
+                            
+                            
+                        })
+                        
+                    }
+                    
+                    
+                })
                 
                 strongself.navigationController?.dismiss(animated: true, completion: nil)
             })
